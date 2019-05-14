@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Tickets" targetNamespace="http://tempuri.org/Tickets.xsd" xmlns:mstns="http://tempuri.org/Tickets.xsd" xmlns="http://tempuri.org/Tickets.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="csISPData" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csISPData (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.InformationSharingPortal.My.MySettings.GlobalReference.Default.csISPData" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="isp_SupportTicketsTableAdapter" GeneratorDataComponentClassName="isp_SupportTicketsTableAdapter" Name="isp_SupportTickets" UserDataComponentName="isp_SupportTicketsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.isp_SupportTickets" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        TicketID, Raised, Subject, LastActivity, ReporterEmail, ReporterOrganisationName, CurrentAdminGroupID,
+                             (SELECT        GroupName
+                               FROM            isp_AdminGroups
+                               WHERE        (AdminGroupID = ST.CurrentAdminGroupID)) AS AdminGroup, AssignedToEmail, TicketStatusID, ClosedDate, ResponseDays, DATEADD(D, 
+                         ResponseDays, Raised) AS TargetDate, RaisedOrganisationID, Escalated
+FROM            isp_SupportTickets AS ST</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TicketID" DataSetColumn="TicketID" />
+              <Mapping SourceColumn="Raised" DataSetColumn="Raised" />
+              <Mapping SourceColumn="Subject" DataSetColumn="Subject" />
+              <Mapping SourceColumn="LastActivity" DataSetColumn="LastActivity" />
+              <Mapping SourceColumn="ReporterEmail" DataSetColumn="ReporterEmail" />
+              <Mapping SourceColumn="ReporterOrganisationName" DataSetColumn="ReporterOrganisationName" />
+              <Mapping SourceColumn="CurrentAdminGroupID" DataSetColumn="CurrentAdminGroupID" />
+              <Mapping SourceColumn="AssignedToEmail" DataSetColumn="AssignedToEmail" />
+              <Mapping SourceColumn="TicketStatusID" DataSetColumn="TicketStatusID" />
+              <Mapping SourceColumn="ClosedDate" DataSetColumn="ClosedDate" />
+              <Mapping SourceColumn="ResponseDays" DataSetColumn="ResponseDays" />
+              <Mapping SourceColumn="RaisedOrganisationID" DataSetColumn="RaisedOrganisationID" />
+              <Mapping SourceColumn="TargetDate" DataSetColumn="TargetDate" />
+              <Mapping SourceColumn="AdminGroup" DataSetColumn="AdminGroup" />
+              <Mapping SourceColumn="Escalated" DataSetColumn="Escalated" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.SupportTickets_GetForUser" DbObjectType="StoredProcedure" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetDataBy">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.SupportTickets_GetForUser</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@ReporterEmail" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@UserAdminGroupID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@SuperAdminGroupID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@IsSuperAdmin" Precision="1" ProviderType="Bit" Scale="0" Size="1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@OrganisationID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@ShowOtherUsers" Precision="1" ProviderType="Bit" Scale="0" Size="1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@ShowArchivedTickets" Precision="1" ProviderType="Bit" Scale="0" Size="1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@ShowAssigned" Precision="1" ProviderType="Bit" Scale="0" Size="1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="varchar" DbType="AnsiString" Direction="Input" ParameterName="@searchString" Precision="0" ProviderType="VarChar" Scale="0" Size="50" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.GetSupportTicketByID" DbObjectType="StoredProcedure" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetSupportTicketByID" GetMethodModifier="Public" GetMethodName="GetSupportTicketByID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetSupportTicketByID" UserSourceName="GetSupportTicketByID">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.GetSupportTicketByID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@IsSuperAdmin" Precision="1" ProviderType="Bit" Scale="0" Size="1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@OrganisationID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@ReporterEmail" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="isp_SupportTicketCommentsTableAdapter" GeneratorDataComponentClassName="isp_SupportTicketCommentsTableAdapter" Name="isp_SupportTicketComments" UserDataComponentName="isp_SupportTicketCommentsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.isp_SupportTicketComments" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [isp_SupportTicketComments] WHERE (([TicketCommentID] = @Original_TicketCommentID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_TicketCommentID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TicketCommentID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [isp_SupportTicketComments] ([TicketID], [TCAdded], [TComment], [TCActive], [TCUserEmail]) VALUES (@TicketID, @TCAdded, @TComment, @TCActive, @TCUserEmail)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TicketID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@TCAdded" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TCAdded" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TComment" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TComment" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@TCActive" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="TCActive" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TCUserEmail" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TCUserEmail" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        TicketCommentID, TicketID, TCAdded, TComment, TCActive, TCUserEmail, CAST(CASE WHEN TCUserEmail  = (SELECT ReporterEmail FROM isp_SupportTickets WHERE TicketID = tc.TicketID) THEN 1 ELSE 0 END AS Bit) AS IsUser
+FROM            isp_SupportTicketComments AS tc</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [isp_SupportTicketComments] SET [TicketID] = @TicketID, [TCAdded] = @TCAdded, [TComment] = @TComment, [TCActive] = @TCActive, [TCUserEmail] = @TCUserEmail WHERE (([TicketCommentID] = @Original_TicketCommentID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TicketID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@TCAdded" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TCAdded" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TComment" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TComment" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@TCActive" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="TCActive" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TCUserEmail" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TCUserEmail" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_TicketCommentID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TicketCommentID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TicketCommentID" DataSetColumn="TicketCommentID" />
+              <Mapping SourceColumn="TicketID" DataSetColumn="TicketID" />
+              <Mapping SourceColumn="TCAdded" DataSetColumn="TCAdded" />
+              <Mapping SourceColumn="TComment" DataSetColumn="TComment" />
+              <Mapping SourceColumn="TCActive" DataSetColumn="TCActive" />
+              <Mapping SourceColumn="TCUserEmail" DataSetColumn="TCUserEmail" />
+              <Mapping SourceColumn="IsUser" DataSetColumn="IsUser" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.isp_SupportTicketComments" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTicketID" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataByTicketID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTicketID" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT TCActive, TCAdded, TCUserEmail, TComment, TicketCommentID, TicketID, CAST(CASE WHEN TCUserEmail  = (SELECT ReporterEmail FROM isp_SupportTickets WHERE TicketID = tc.TicketID) THEN 1 ELSE 0 END AS Bit) AS IsUser FROM isp_SupportTicketComments AS tc WHERE (TicketID = @TicketID) AND (TCActive = 1) ORDER BY TCAdded DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="TicketID" ColumnName="TicketID" DataSourceName="ispdata.dbo.isp_SupportTicketComments" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TicketID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FAQsTableAdapter" GeneratorDataComponentClassName="FAQsTableAdapter" Name="FAQs" UserDataComponentName="FAQsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.FAQs" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [FAQs] WHERE (([FAQID] = @Original_FAQID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FAQID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FAQID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO FAQs
+                         (CreatedDate, QAnchor, QText, AHTML, Published, AdminGroupID)
+VALUES        (getUTCDate(),@QAnchor,@QText,@AHTML,@Published,@AdminGroupID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="QAnchor" ColumnName="QAnchor" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@QAnchor" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="QAnchor" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="QText" ColumnName="QText" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="nvarchar(255)" DbType="String" Direction="Input" ParameterName="@QText" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumn="QText" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="AHTML" ColumnName="AHTML" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="nvarchar(MAX)" DbType="String" Direction="Input" ParameterName="@AHTML" Precision="0" ProviderType="NVarChar" Scale="0" Size="2147483647" SourceColumn="AHTML" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Published" ColumnName="Published" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@Published" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="Published" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="AdminGroupID" ColumnName="AdminGroupID" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AdminGroupID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="AdminGroupID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        FAQID, CreatedDate, ViewCount, QAnchor, QText, AHTML, Published, AdminGroupID,
+                             CASE WHEN AdminGroupID = 0 THEN 'All' ELSE (SELECT        GroupName
+                               FROM            isp_AdminGroups
+                               WHERE        (AdminGroupID = faq.AdminGroupID)) END AS AdminGroup
+FROM            FAQs AS faq</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [FAQs] SET [CreatedDate] = @CreatedDate, [ViewCount] = @ViewCount, [QAnchor] = @QAnchor, [QText] = @QText, [AHTML] = @AHTML, [Published] = @Published, [AdminGroupID] = @AdminGroupID WHERE (([FAQID] = @Original_FAQID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@CreatedDate" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="CreatedDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ViewCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ViewCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@QAnchor" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="QAnchor" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@QText" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="QText" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@AHTML" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="AHTML" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Published" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Published" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@AdminGroupID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="AdminGroupID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FAQID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FAQID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="FAQID" DataSetColumn="FAQID" />
+              <Mapping SourceColumn="CreatedDate" DataSetColumn="CreatedDate" />
+              <Mapping SourceColumn="ViewCount" DataSetColumn="ViewCount" />
+              <Mapping SourceColumn="QAnchor" DataSetColumn="QAnchor" />
+              <Mapping SourceColumn="QText" DataSetColumn="QText" />
+              <Mapping SourceColumn="AHTML" DataSetColumn="AHTML" />
+              <Mapping SourceColumn="Published" DataSetColumn="Published" />
+              <Mapping SourceColumn="AdminGroupID" DataSetColumn="AdminGroupID" />
+              <Mapping SourceColumn="AdminGroup" DataSetColumn="AdminGroup" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.FAQs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetByAdminGroup" GetMethodModifier="Public" GetMethodName="GetByAdminGroup" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetByAdminGroup" UserSourceName="GetByAdminGroup">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        AHTML, AdminGroupID, CreatedDate, FAQID, Published, QAnchor, QText, ViewCount, CASE WHEN AdminGroupID = 0 THEN 'All' ELSE
+                             (SELECT        GroupName
+                               FROM            isp_AdminGroups
+                               WHERE        (AdminGroupID = faq.AdminGroupID)) END AS AdminGroup
+FROM            FAQs AS faq
+WHERE        (AdminGroupID IN
+                             (SELECT        AdminGroupID
+                               FROM            isp_SuperAdminGroups
+                               WHERE        (SuperAdminID = @SuperAdminID))) OR
+                         (CAST(@IsCentralSA AS bit) = 1)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="IsCentralSA" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Boolean" Direction="Input" ParameterName="@IsCentralSA" Precision="0" ProviderType="Bit" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="SuperAdminID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@SuperAdminID" Precision="0" Scale="0" Size="4" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.FAQs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetByAdminGroupID" GetMethodModifier="Public" GetMethodName="GetByAdminGroupID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetByAdminGroupID" UserSourceName="GetByAdminGroupID">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        AHTML, AdminGroupID, CreatedDate, FAQID, Published, QAnchor, QText, ViewCount, CASE WHEN AdminGroupID = 0 THEN 'All' ELSE
+                             (SELECT        GroupName
+                               FROM            isp_AdminGroups
+                               WHERE        (AdminGroupID = faq.AdminGroupID)) END AS AdminGroup
+FROM            FAQs AS faq
+WHERE        (AdminGroupID = @AdminGroupID) OR
+                         (AdminGroupID = 0)
+ORDER BY ViewCount DESC, CreatedDate DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="AdminGroupID" ColumnName="AdminGroupID" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AdminGroupID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="AdminGroupID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.FAQs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetFiltered" GetMethodModifier="Public" GetMethodName="GetFiltered" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetFiltered" UserSourceName="GetFiltered">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        AHTML, AdminGroupID, CreatedDate, FAQID, Published, QAnchor, QText, ViewCount, CASE WHEN AdminGroupID = 0 THEN 'All' ELSE
+                             (SELECT        GroupName
+                               FROM            isp_AdminGroups
+                               WHERE        (AdminGroupID = faq.AdminGroupID)) END AS AdminGroup
+FROM            FAQs AS faq
+WHERE        (AdminGroupID = @AdminGroupID) AND (QText LIKE N'%' + REPLACE(@SearchTerm, ' ', '%') + N'%') OR
+                         (AdminGroupID = @AdminGroupID) AND (@SearchTerm IS NULL) OR
+                         (AdminGroupID = 0) AND (QText LIKE N'%' + REPLACE(@SearchTerm, ' ', '%') + N'%') OR
+                         (AdminGroupID = 0) AND (@SearchTerm IS NULL) OR
+                         (AdminGroupID = @AdminGroupID) AND (AHTML LIKE N'%' + REPLACE(@SearchTerm, ' ', '%') + N'%') OR
+                         (AdminGroupID = @AdminGroupID) AND (@SearchTerm IS NULL) OR
+                         (AdminGroupID = 0) AND (AHTML LIKE N'%' + REPLACE(@SearchTerm, ' ', '%') + N'%') OR
+                         (AdminGroupID = 0) AND (@SearchTerm IS NULL)
+ORDER BY ViewCount DESC, CreatedDate DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="AdminGroupID" ColumnName="AdminGroupID" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AdminGroupID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="AdminGroupID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="SearchTerm" ColumnName="QText" DataSourceName="ispdata.dbo.FAQs" DataTypeServer="nvarchar(255)" DbType="AnsiString" Direction="Input" ParameterName="@SearchTerm" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumn="QText" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.SupportTicketComment_InsertAndReturnID" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SupportTicketComment_InsertAndReturnID" MethodsParameterType="CLR" Modifier="Public" Name="SupportTicketComment_InsertAndReturnID" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="SupportTicketComment_InsertAndReturnID">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="true">
+                <CommandText>dbo.SupportTicketComment_InsertAndReturnID</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@SupportTicketID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@Comment" Precision="0" ProviderType="NVarChar" Scale="0" Size="2147483647" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@ReporterEmail" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Status" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.SupportTicket_InsertAndReturnID" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SupportTicket_InsertAndReturnID" MethodsParameterType="CLR" Modifier="Public" Name="SupportTicket_InsertAndReturnID" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="SupportTicket_InsertAndReturnID">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>dbo.SupportTicket_InsertAndReturnID</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@Subject" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@ReporterEmail" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@ReporterOrganisationName" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CurrentAdminGroupID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@RaisedOrganisationID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CloseTicket" MethodsParameterType="CLR" Modifier="Public" Name="CloseTicket" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="CloseTicket">
+            <UpdateCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>UPDATE       isp_SupportTickets
+SET                ClosedDate = GETDATE(), TicketStatusID = 4
+WHERE        (TicketID = @TicketID)</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="false" AutogeneratedName="TicketID" ColumnName="TicketID" DataSourceName="ispdata.dbo.isp_SupportTickets" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TicketID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                </Parameters>
+              </DbCommand>
+            </UpdateCommand>
+          </DbSource>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.isp_OrganisationUsers" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetUsernameFromEmail" MethodsParameterType="CLR" Modifier="Public" Name="GetUsernameFromEmail" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="GetUsernameFromEmail">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>SELECT        TOP (1) OrganisationUserName
+FROM            isp_OrganisationUsers
+WHERE        (Active = 1) AND (OrganisationUserEmail = @Email)</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="false" AutogeneratedName="Email" ColumnName="OrganisationUserEmail" DataSourceName="ispdata.dbo.isp_OrganisationUsers" DataTypeServer="nvarchar(255)" DbType="String" Direction="Input" ParameterName="@Email" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumn="OrganisationUserEmail" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="AssignTicketToEmail" MethodsParameterType="CLR" Modifier="Public" Name="AssignTicketToEmail" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="AssignTicketToEmail">
+            <UpdateCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>UPDATE       isp_SupportTickets
+SET                LastActivity = GETDATE(), AssignedToEmail = @AssignedToEmail
+WHERE        (TicketID = @TicketID)</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="AssignedToEmail" ColumnName="AssignedToEmail" DataSourceName="ispdata.dbo.isp_SupportTickets" DataTypeServer="nvarchar(255)" DbType="String" Direction="Input" ParameterName="@AssignedToEmail" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumn="AssignedToEmail" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="false" AutogeneratedName="TicketID" ColumnName="TicketID" DataSourceName="ispdata.dbo.isp_SupportTickets" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TicketID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                </Parameters>
+              </DbCommand>
+            </UpdateCommand>
+          </DbSource>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="EscalateTicket" MethodsParameterType="CLR" Modifier="Public" Name="EscalateTicket" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="EscalateTicket">
+            <UpdateCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>UPDATE       isp_SupportTickets
+SET                Escalated = 1
+WHERE        (TicketID = @TicketID)</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="false" AutogeneratedName="TicketID" ColumnName="TicketID" DataSourceName="ispdata.dbo.isp_SupportTickets" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TicketID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                </Parameters>
+              </DbCommand>
+            </UpdateCommand>
+          </DbSource>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="SetResolveDaysForTicket" MethodsParameterType="CLR" Modifier="Public" Name="SetResolveDaysForTicket" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="SetResolveDaysForTicket">
+            <UpdateCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>UPDATE       isp_SupportTickets
+SET                ResponseDays = @Days
+WHERE        (TicketID = @TicketID)</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="false" AutogeneratedName="Days" ColumnName="ResponseDays" DataSourceName="ispdata.dbo.isp_SupportTickets" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Days" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ResponseDays" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="false" AutogeneratedName="TicketID" ColumnName="TicketID" DataSourceName="ispdata.dbo.isp_SupportTickets" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TicketID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TicketID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                </Parameters>
+              </DbCommand>
+            </UpdateCommand>
+          </DbSource>
+          <DbSource ConnectionRef="csISPData (MySettings)" DbObjectName="ispdata.dbo.uspIncrementFAQViewCount" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="uspIncrementFAQViewCount" MethodsParameterType="CLR" Modifier="Public" Name="uspIncrementFAQViewCount" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="uspIncrementFAQViewCount">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>dbo.uspIncrementFAQViewCount</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@FAQID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Tickets" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Tickets" msprop:Generator_UserDSName="Tickets">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="isp_SupportTickets" msprop:Generator_TableClassName="isp_SupportTicketsDataTable" msprop:Generator_TableVarName="tableisp_SupportTickets" msprop:Generator_RowChangedName="isp_SupportTicketsRowChanged" msprop:Generator_TablePropName="isp_SupportTickets" msprop:Generator_RowDeletingName="isp_SupportTicketsRowDeleting" msprop:Generator_RowChangingName="isp_SupportTicketsRowChanging" msprop:Generator_RowEvHandlerName="isp_SupportTicketsRowChangeEventHandler" msprop:Generator_RowDeletedName="isp_SupportTicketsRowDeleted" msprop:Generator_RowClassName="isp_SupportTicketsRow" msprop:Generator_UserTableName="isp_SupportTickets" msprop:Generator_RowEvArgName="isp_SupportTicketsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TicketID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnTicketID" msprop:Generator_ColumnPropNameInRow="TicketID" msprop:Generator_ColumnPropNameInTable="TicketIDColumn" msprop:Generator_UserColumnName="TicketID" type="xs:int" />
+              <xs:element name="Raised" msprop:Generator_ColumnVarNameInTable="columnRaised" msprop:Generator_ColumnPropNameInRow="Raised" msprop:Generator_ColumnPropNameInTable="RaisedColumn" msprop:Generator_UserColumnName="Raised" type="xs:dateTime" />
+              <xs:element name="Subject" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Subject" msprop:Generator_ColumnVarNameInTable="columnSubject" msprop:Generator_ColumnPropNameInTable="SubjectColumn" msprop:Generator_UserColumnName="Subject" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastActivity" msprop:Generator_ColumnVarNameInTable="columnLastActivity" msprop:Generator_ColumnPropNameInRow="LastActivity" msprop:Generator_ColumnPropNameInTable="LastActivityColumn" msprop:Generator_UserColumnName="LastActivity" type="xs:dateTime" />
+              <xs:element name="ReporterEmail" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="ReporterEmail" msprop:Generator_ColumnVarNameInTable="columnReporterEmail" msprop:Generator_ColumnPropNameInTable="ReporterEmailColumn" msprop:Generator_UserColumnName="ReporterEmail" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ReporterOrganisationName" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="ReporterOrganisationName" msprop:Generator_ColumnVarNameInTable="columnReporterOrganisationName" msprop:Generator_ColumnPropNameInTable="ReporterOrganisationNameColumn" msprop:Generator_UserColumnName="ReporterOrganisationName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CurrentAdminGroupID" msprop:Generator_ColumnVarNameInTable="columnCurrentAdminGroupID" msprop:Generator_ColumnPropNameInRow="CurrentAdminGroupID" msprop:Generator_ColumnPropNameInTable="CurrentAdminGroupIDColumn" msprop:Generator_UserColumnName="CurrentAdminGroupID" type="xs:int" minOccurs="0" />
+              <xs:element name="AssignedToEmail" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="AssignedToEmail" msprop:Generator_ColumnVarNameInTable="columnAssignedToEmail" msprop:Generator_ColumnPropNameInTable="AssignedToEmailColumn" msprop:Generator_UserColumnName="AssignedToEmail" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TicketStatusID" msprop:Generator_ColumnVarNameInTable="columnTicketStatusID" msprop:Generator_ColumnPropNameInRow="TicketStatusID" msprop:Generator_ColumnPropNameInTable="TicketStatusIDColumn" msprop:Generator_UserColumnName="TicketStatusID" type="xs:int" />
+              <xs:element name="ClosedDate" msprop:Generator_ColumnVarNameInTable="columnClosedDate" msprop:Generator_ColumnPropNameInRow="ClosedDate" msprop:Generator_ColumnPropNameInTable="ClosedDateColumn" msprop:Generator_UserColumnName="ClosedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ResponseDays" msprop:Generator_ColumnVarNameInTable="columnResponseDays" msprop:Generator_ColumnPropNameInRow="ResponseDays" msprop:Generator_ColumnPropNameInTable="ResponseDaysColumn" msprop:Generator_UserColumnName="ResponseDays" type="xs:int" />
+              <xs:element name="RaisedOrganisationID" msprop:Generator_ColumnVarNameInTable="columnRaisedOrganisationID" msprop:Generator_ColumnPropNameInRow="RaisedOrganisationID" msprop:Generator_ColumnPropNameInTable="RaisedOrganisationIDColumn" msprop:Generator_UserColumnName="RaisedOrganisationID" type="xs:int" />
+              <xs:element name="TargetDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTargetDate" msprop:Generator_ColumnPropNameInRow="TargetDate" msprop:Generator_ColumnPropNameInTable="TargetDateColumn" msprop:Generator_UserColumnName="TargetDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="AdminGroup" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAdminGroup" msprop:Generator_ColumnPropNameInRow="AdminGroup" msprop:Generator_ColumnPropNameInTable="AdminGroupColumn" msprop:Generator_UserColumnName="AdminGroup" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Escalated" msprop:Generator_ColumnVarNameInTable="columnEscalated" msprop:Generator_ColumnPropNameInRow="Escalated" msprop:Generator_ColumnPropNameInTable="EscalatedColumn" msprop:Generator_UserColumnName="Escalated" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="isp_SupportTicketComments" msprop:Generator_TableClassName="isp_SupportTicketCommentsDataTable" msprop:Generator_TableVarName="tableisp_SupportTicketComments" msprop:Generator_TablePropName="isp_SupportTicketComments" msprop:Generator_RowDeletingName="isp_SupportTicketCommentsRowDeleting" msprop:Generator_RowChangingName="isp_SupportTicketCommentsRowChanging" msprop:Generator_RowEvHandlerName="isp_SupportTicketCommentsRowChangeEventHandler" msprop:Generator_RowDeletedName="isp_SupportTicketCommentsRowDeleted" msprop:Generator_UserTableName="isp_SupportTicketComments" msprop:Generator_RowChangedName="isp_SupportTicketCommentsRowChanged" msprop:Generator_RowEvArgName="isp_SupportTicketCommentsRowChangeEvent" msprop:Generator_RowClassName="isp_SupportTicketCommentsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TicketCommentID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnTicketCommentID" msprop:Generator_ColumnPropNameInRow="TicketCommentID" msprop:Generator_ColumnPropNameInTable="TicketCommentIDColumn" msprop:Generator_UserColumnName="TicketCommentID" type="xs:int" />
+              <xs:element name="TicketID" msprop:Generator_ColumnVarNameInTable="columnTicketID" msprop:Generator_ColumnPropNameInRow="TicketID" msprop:Generator_ColumnPropNameInTable="TicketIDColumn" msprop:Generator_UserColumnName="TicketID" type="xs:int" />
+              <xs:element name="TCAdded" msprop:Generator_ColumnVarNameInTable="columnTCAdded" msprop:Generator_ColumnPropNameInRow="TCAdded" msprop:Generator_ColumnPropNameInTable="TCAddedColumn" msprop:Generator_UserColumnName="TCAdded" type="xs:dateTime" />
+              <xs:element name="TComment" msprop:Generator_ColumnVarNameInTable="columnTComment" msprop:Generator_ColumnPropNameInRow="TComment" msprop:Generator_ColumnPropNameInTable="TCommentColumn" msprop:Generator_UserColumnName="TComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TCActive" msprop:Generator_ColumnVarNameInTable="columnTCActive" msprop:Generator_ColumnPropNameInRow="TCActive" msprop:Generator_ColumnPropNameInTable="TCActiveColumn" msprop:Generator_UserColumnName="TCActive" type="xs:boolean" />
+              <xs:element name="TCUserEmail" msprop:Generator_ColumnVarNameInTable="columnTCUserEmail" msprop:Generator_ColumnPropNameInRow="TCUserEmail" msprop:Generator_ColumnPropNameInTable="TCUserEmailColumn" msprop:Generator_UserColumnName="TCUserEmail" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsUser" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnIsUser" msprop:Generator_ColumnPropNameInRow="IsUser" msprop:Generator_ColumnPropNameInTable="IsUserColumn" msprop:Generator_UserColumnName="IsUser" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FAQs" msprop:Generator_TableClassName="FAQsDataTable" msprop:Generator_TableVarName="tableFAQs" msprop:Generator_RowChangedName="FAQsRowChanged" msprop:Generator_TablePropName="FAQs" msprop:Generator_RowDeletingName="FAQsRowDeleting" msprop:Generator_RowChangingName="FAQsRowChanging" msprop:Generator_RowEvHandlerName="FAQsRowChangeEventHandler" msprop:Generator_RowDeletedName="FAQsRowDeleted" msprop:Generator_RowClassName="FAQsRow" msprop:Generator_UserTableName="FAQs" msprop:Generator_RowEvArgName="FAQsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FAQID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnFAQID" msprop:Generator_ColumnPropNameInRow="FAQID" msprop:Generator_ColumnPropNameInTable="FAQIDColumn" msprop:Generator_UserColumnName="FAQID" type="xs:int" />
+              <xs:element name="CreatedDate" msprop:Generator_ColumnVarNameInTable="columnCreatedDate" msprop:Generator_ColumnPropNameInRow="CreatedDate" msprop:Generator_ColumnPropNameInTable="CreatedDateColumn" msprop:Generator_UserColumnName="CreatedDate" type="xs:dateTime" />
+              <xs:element name="ViewCount" msprop:Generator_ColumnVarNameInTable="columnViewCount" msprop:Generator_ColumnPropNameInRow="ViewCount" msprop:Generator_ColumnPropNameInTable="ViewCountColumn" msprop:Generator_UserColumnName="ViewCount" type="xs:int" />
+              <xs:element name="QAnchor" msprop:Generator_ColumnVarNameInTable="columnQAnchor" msprop:Generator_ColumnPropNameInRow="QAnchor" msprop:Generator_ColumnPropNameInTable="QAnchorColumn" msprop:Generator_UserColumnName="QAnchor">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QText" msprop:Generator_ColumnVarNameInTable="columnQText" msprop:Generator_ColumnPropNameInRow="QText" msprop:Generator_ColumnPropNameInTable="QTextColumn" msprop:Generator_UserColumnName="QText">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AHTML" msprop:Generator_ColumnVarNameInTable="columnAHTML" msprop:Generator_ColumnPropNameInRow="AHTML" msprop:Generator_ColumnPropNameInTable="AHTMLColumn" msprop:Generator_UserColumnName="AHTML">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Published" msprop:Generator_ColumnVarNameInTable="columnPublished" msprop:Generator_ColumnPropNameInRow="Published" msprop:Generator_ColumnPropNameInTable="PublishedColumn" msprop:Generator_UserColumnName="Published" type="xs:boolean" />
+              <xs:element name="AdminGroupID" msprop:Generator_ColumnVarNameInTable="columnAdminGroupID" msprop:Generator_ColumnPropNameInRow="AdminGroupID" msprop:Generator_ColumnPropNameInTable="AdminGroupIDColumn" msprop:Generator_UserColumnName="AdminGroupID" type="xs:int" />
+              <xs:element name="AdminGroup" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAdminGroup" msprop:Generator_ColumnPropNameInRow="AdminGroup" msprop:Generator_ColumnPropNameInTable="AdminGroupColumn" msprop:Generator_UserColumnName="AdminGroup" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:isp_SupportTickets" />
+      <xs:field xpath="mstns:TicketID" />
+    </xs:unique>
+    <xs:unique name="isp_SupportTicketComments_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:isp_SupportTicketComments" />
+      <xs:field xpath="mstns:TicketCommentID" />
+    </xs:unique>
+    <xs:unique name="FAQs_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FAQs" />
+      <xs:field xpath="mstns:FAQID" />
+    </xs:unique>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="FK_isp_SupportTicketComments_isp_SupportTickets" msdata:parent="isp_SupportTickets" msdata:child="isp_SupportTicketComments" msdata:parentkey="TicketID" msdata:childkey="TicketID" msprop:Generator_UserChildTable="isp_SupportTicketComments" msprop:Generator_ChildPropName="Getisp_SupportTicketCommentsRows" msprop:Generator_UserRelationName="FK_isp_SupportTicketComments_isp_SupportTickets" msprop:Generator_ParentPropName="isp_SupportTicketsRow" msprop:Generator_RelationVarName="relationFK_isp_SupportTicketComments_isp_SupportTickets" msprop:Generator_UserParentTable="isp_SupportTickets" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>
